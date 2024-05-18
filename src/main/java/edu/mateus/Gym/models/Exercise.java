@@ -27,6 +27,7 @@ public class Exercise {
 
 	@Column
 	@NonNull
+	@Enumerated(EnumType.STRING)
 	private Intensity intensity;
 
 	@NonNull
@@ -39,6 +40,7 @@ public class Exercise {
 	@ElementCollection(targetClass = MuscleGroups.class)
 	@CollectionTable(name="muscles",joinColumns = @JoinColumn(name = "exercise_id"))
 	@Enumerated(EnumType.STRING)
+	//transformar em uma entidade
 	private List<MuscleGroups> muscles;
 
 	@Column
