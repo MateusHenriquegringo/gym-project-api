@@ -3,13 +3,14 @@ package edu.mateus.Gym.models;
 import edu.mateus.Gym.enums.ExerciseDifficulty;
 import edu.mateus.Gym.enums.ExerciseType;
 import edu.mateus.Gym.enums.Intensity;
-import edu.mateus.Gym.enums.MuscleGroups;
+import edu.mateus.Gym.enums.MuscleGroupsEnum;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -37,11 +38,10 @@ public class Exercise {
 
 	@NonNull
 	@Column
-	@ElementCollection(targetClass = MuscleGroups.class)
-	@CollectionTable(name="muscles",joinColumns = @JoinColumn(name = "exercise_id"))
 	@Enumerated(EnumType.STRING)
-	//transformar em uma entidade
-	private List<MuscleGroups> muscles;
+	@ElementCollection(targetClass = MuscleGroupsEnum.class)
+	@CollectionTable(name = "muscles")
+	private List<MuscleGroupsEnum> muscles;
 
 	@Column
 	@Enumerated(EnumType.STRING)

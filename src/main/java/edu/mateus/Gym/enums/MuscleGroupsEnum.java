@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public enum MuscleGroups {
+public enum MuscleGroupsEnum {
 	ABDOMEN("Abdomen"),
 	ADUTORES("Adutores"),
 	ANTEBRACO("Antebraço"),
