@@ -1,4 +1,4 @@
-package edu.mateus.Gym.exceptions;
+package edu.mateus.Gym.Exercises.exceptions;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;

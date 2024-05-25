@@ -1,4 +1,4 @@
-package edu.mateus.Gym.enums;
+package edu.mateus.Gym.Exercises.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

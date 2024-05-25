@@ -1,9 +1,10 @@
-package edu.mateus.Gym.controllers;
+package edu.mateus.Gym.Exercises.controllers;
 
-import edu.mateus.Gym.dtos.ExerciseDTO;
-import edu.mateus.Gym.enums.ExerciseDifficulty;
-import edu.mateus.Gym.models.Exercise;
-import edu.mateus.Gym.services.ExerciseService;
+import edu.mateus.Gym.Exercises.dtos.ExerciseDTO;
+import edu.mateus.Gym.Exercises.enums.ExerciseDifficulty;
+import edu.mateus.Gym.Exercises.models.ExerciseModel;
+import edu.mateus.Gym.Exercises.services.ExerciseService;
+import edu.mateus.Gym.Exercises.tools.ExercisesHateoas;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,14 +23,20 @@ public class ExerciseController {
 
 
 	@GetMapping()
-	public ResponseEntity<List<Exercise>> getExercises() {
+	public ResponseEntity<List<ExerciseModel>> getAllExercises(
+			@RequestParam(required = false) ExerciseDifficulty difficulty) {
 
-		return ResponseEntity.status(HttpStatus.OK).body(exerciseService.getAllExercises());
+		if (difficulty == null) {
+			return ResponseEntity.status(HttpStatus.OK).body(ExercisesHateoas.exerciseToHateoas(exerciseService.getAllExercises()));
+		} else {
+			return ResponseEntity.status(HttpStatus.OK).body(ExercisesHateoas.exerciseToHateoas(exerciseService.getExercisesByDifficulty(difficulty)));
+		}
+
 	}
 
 
 	@PostMapping()
-	public ResponseEntity<Exercise> createExercise(@RequestBody @Valid ExerciseDTO exerciseDTO) {
+	public ResponseEntity<ExerciseModel> createExercise(@RequestBody @Valid ExerciseDTO exerciseDTO) {
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(exerciseService.createExercise(exerciseDTO));
 
@@ -39,14 +46,10 @@ public class ExerciseController {
 	@GetMapping("/{id}")
 	public ResponseEntity<Object> getExerciseById(@PathVariable Long id) {
 
-		return ResponseEntity.status(HttpStatus.OK).body(exerciseService.getExerciseById(id));
+		return ResponseEntity.status(HttpStatus.OK).body(ExercisesHateoas.exerciseToHateoas(exerciseService.getExerciseById(id)));
 
 	}
 
-	@GetMapping("/difficulty")
-	public ResponseEntity<Object> getExercisesByDifficulty(@RequestParam ExerciseDifficulty difficulty){
-		return ResponseEntity.status(HttpStatus.OK).body(exerciseService.getExercisesByDifficulty(difficulty));
-	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Object> editExercise(@Valid @RequestBody ExerciseDTO exerciseDTO, @PathVariable Long id) {
@@ -54,9 +57,12 @@ public class ExerciseController {
 		return ResponseEntity.status(HttpStatus.OK).body(exerciseService.editExercise(exerciseDTO, id));
 	}
 
+
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Object> deleteExercise(@PathVariable Long id){
+	public ResponseEntity<Object> deleteExercise(@PathVariable Long id) {
+
 		exerciseService.deleteExercise(id);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
+
 }

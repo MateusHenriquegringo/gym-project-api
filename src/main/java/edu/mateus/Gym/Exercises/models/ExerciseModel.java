@@ -6,17 +6,17 @@ import edu.mateus.Gym.Exercises.enums.Intensity;
 import edu.mateus.Gym.Exercises.enums.MuscleGroupsEnum;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.util.List;
 
-@AllArgsConstructor
+
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-@Getter
-@Setter
-@EqualsAndHashCode
+@Data
 @Entity
 @Table(name="exercises")
-public class Exercise {
+public class ExerciseModel extends RepresentationModel<ExerciseModel> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name="exercise_id", unique = true)

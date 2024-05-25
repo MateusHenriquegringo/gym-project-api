@@ -1,10 +1,11 @@
-package edu.mateus.Gym.services;
+package edu.mateus.Gym.Exercises.services;
 
-import edu.mateus.Gym.dtos.ExerciseDTO;
-import edu.mateus.Gym.enums.ExerciseDifficulty;
-import edu.mateus.Gym.exceptions.ResourceNotFoundException;
-import edu.mateus.Gym.models.Exercise;
-import edu.mateus.Gym.repositorys.ExerciseRepository;
+import edu.mateus.Gym.Exercises.controllers.ExerciseController;
+import edu.mateus.Gym.Exercises.dtos.ExerciseDTO;
+import edu.mateus.Gym.Exercises.enums.ExerciseDifficulty;
+import edu.mateus.Gym.Exercises.exceptions.ResourceNotFoundException;
+import edu.mateus.Gym.Exercises.models.ExerciseModel;
+import edu.mateus.Gym.Exercises.repositorys.ExerciseRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,11 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 
 @Service
 public class ExerciseService {
@@ -20,48 +26,54 @@ public class ExerciseService {
 	private ExerciseRepository exerciseRepository;
 
 
-	public List<Exercise> getAllExercises() {
-
+	public List<ExerciseModel> getAllExercises() {
 		return exerciseRepository.findAll();
 	}
 
 
-	public Exercise getExerciseById(Long id) {
+	public List<ExerciseModel> getExercisesByDifficulty(ExerciseDifficulty difficulty) {
+		return exerciseRepository.findAllByDifficulty(difficulty);
+	}
 
+
+	public ExerciseModel getExerciseById(Long id) {
 		return exerciseRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("exercise was not found"));
 	}
 
 
 	@Transactional
-	public Exercise createExercise(ExerciseDTO exerciseDTO) {
+	public ExerciseModel createExercise(ExerciseDTO exerciseDTO) {
 
-		Exercise exercise = new Exercise();
-		BeanUtils.copyProperties(exerciseDTO, exercise);
+		ExerciseModel exerciseModel = new ExerciseModel();
+		BeanUtils.copyProperties(exerciseDTO, exerciseModel);
 
-		if (exerciseRepository.existsByName(exercise.getName())) {
+		if (exerciseRepository.existsByName(exerciseModel.getName())) {
 			throw new DataIntegrityViolationException("this exercise already exists");
 		} else {
-			return exerciseRepository.save(exercise);
+			return exerciseRepository.save(exerciseModel);
 		}
 	}
 
 
+
 	@Transactional
-	public Exercise editExercise(ExerciseDTO exerciseDTO, Long id) {
-		Exercise exercise = new Exercise();
-		exercise.setId(id);
-		BeanUtils.copyProperties(exerciseDTO, exercise);
+	public ExerciseModel editExercise(ExerciseDTO exerciseDTO, Long id) {
+
+		ExerciseModel exerciseModel = new ExerciseModel();
+		exerciseModel.setId(id);
+		BeanUtils.copyProperties(exerciseDTO, exerciseModel);
 
 
-		if (exerciseRepository.existsById(exercise.getId())) {
-			if (exerciseRepository.existsByName(exercise.getName())) {
+		if (exerciseRepository.existsById(exerciseModel.getId())) {
+			if (exerciseRepository.existsByName(exerciseModel.getName())) {
 				throw new DataIntegrityViolationException("this exercise already exists");
 			}
-			return exerciseRepository.save(exercise);
+			return exerciseRepository.save(exerciseModel);
 		} else {
 			throw new ResourceNotFoundException("didn't edited, exercise was not found");
 		}
 	}
+
 
 
 	public void deleteExercise(Long id) {
@@ -73,11 +85,6 @@ public class ExerciseService {
 		}
 	}
 
-
-	public List<Exercise> getExercisesByDifficulty(ExerciseDifficulty difficulty) {
-
-		return exerciseRepository.findAllByDifficulty(difficulty);
-	}
 
 }
 

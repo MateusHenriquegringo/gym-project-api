@@ -1,15 +1,15 @@
-package edu.mateus.Gym.repositorys;
+package edu.mateus.Gym.Exercises.repositorys;
 
-import edu.mateus.Gym.enums.ExerciseDifficulty;
-import edu.mateus.Gym.models.Exercise;
+import edu.mateus.Gym.Exercises.enums.ExerciseDifficulty;
+import edu.mateus.Gym.Exercises.models.ExerciseModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface ExerciseRepository extends JpaRepository<Exercise, Long> {
-	List<Exercise> findAllByDifficulty(ExerciseDifficulty difficulty);
+public interface ExerciseRepository extends JpaRepository<ExerciseModel, Long> {
+	List<ExerciseModel> findAllByDifficulty(ExerciseDifficulty difficulty);
 
 	boolean existsByName(String name);
 }

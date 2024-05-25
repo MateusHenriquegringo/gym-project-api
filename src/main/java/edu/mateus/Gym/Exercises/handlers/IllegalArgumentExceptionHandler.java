@@ -1,4 +1,4 @@
-package edu.mateus.Gym.handlers;
+package edu.mateus.Gym.Exercises.handlers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
