@@ -1,9 +1,9 @@
-package edu.mateus.Gym.models;
+package edu.mateus.Gym.Exercises.models;
 
-import edu.mateus.Gym.enums.ExerciseDifficulty;
-import edu.mateus.Gym.enums.ExerciseType;
-import edu.mateus.Gym.enums.Intensity;
-import edu.mateus.Gym.enums.MuscleGroupsEnum;
+import edu.mateus.Gym.Exercises.enums.ExerciseDifficulty;
+import edu.mateus.Gym.Exercises.enums.ExerciseType;
+import edu.mateus.Gym.Exercises.enums.Intensity;
+import edu.mateus.Gym.Exercises.enums.MuscleGroupsEnum;
 import jakarta.persistence.*;
 import lombok.*;
 
