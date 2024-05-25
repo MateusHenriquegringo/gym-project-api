@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface ExerciseRepository extends JpaRepository<Exercise, Long> {
 	List<Exercise> findAllByDifficulty(ExerciseDifficulty difficulty);
+
+	boolean existsByName(String name);
 }
