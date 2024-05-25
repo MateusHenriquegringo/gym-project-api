@@ -11,14 +11,22 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Component
 public class ExercisesHateoas {
-	public static ExerciseModel exerciseToHateoas(ExerciseModel exerciseModel){
-		exerciseModel.add(linkTo(methodOn(ExerciseController.class).getAllExercises(null)).withRel("allExercises"));
-		return exerciseModel;
+
+	public static ExerciseModel exerciseToHateoas(ExerciseModel exerciseModel) {
+
+		return exerciseModel.add(
+						linkTo(methodOn(ExerciseController.class).getAllExercises(null)).withRel("allExercises"))
+				.add(linkTo(methodOn(ExerciseController.class).getExerciseById(exerciseModel.getId())).withSelfRel());
+
 	}
-	public static List<ExerciseModel> exerciseToHateoas(List<ExerciseModel> exerciseModels){
-		for (ExerciseModel exerciseModel : exerciseModels){
-			exerciseModel.add(linkTo(methodOn(ExerciseController.class).getExerciseById(exerciseModel.getId())).withSelfRel());
-		}
-		return exerciseModels;
+
+
+	public static List<ExerciseModel> exerciseToHateoas(List<ExerciseModel> exerciseModels) {
+
+		return exerciseModels.stream()
+				.map(exerciseModel -> exerciseModel.add(linkTo(methodOn(ExerciseController.class).getExerciseById(
+						exerciseModel.getId())).withSelfRel()))
+				.toList();
 	}
+
 }

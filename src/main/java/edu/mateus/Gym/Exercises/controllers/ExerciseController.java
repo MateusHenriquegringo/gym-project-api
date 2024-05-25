@@ -27,9 +27,11 @@ public class ExerciseController {
 			@RequestParam(required = false) ExerciseDifficulty difficulty) {
 
 		if (difficulty == null) {
-			return ResponseEntity.status(HttpStatus.OK).body(ExercisesHateoas.exerciseToHateoas(exerciseService.getAllExercises()));
+			return ResponseEntity.status(HttpStatus.OK)
+					.body(ExercisesHateoas.exerciseToHateoas(exerciseService.getAllExercises()));
 		} else {
-			return ResponseEntity.status(HttpStatus.OK).body(ExercisesHateoas.exerciseToHateoas(exerciseService.getExercisesByDifficulty(difficulty)));
+			return ResponseEntity.status(HttpStatus.OK)
+					.body(ExercisesHateoas.exerciseToHateoas(exerciseService.getExercisesByDifficulty(difficulty)));
 		}
 
 	}
@@ -38,7 +40,8 @@ public class ExerciseController {
 	@PostMapping()
 	public ResponseEntity<ExerciseModel> createExercise(@RequestBody @Valid ExerciseDTO exerciseDTO) {
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(exerciseService.createExercise(exerciseDTO));
+		return ResponseEntity.status(HttpStatus.CREATED)
+				.body(ExercisesHateoas.exerciseToHateoas(exerciseService.createExercise(exerciseDTO)));
 
 	}
 
@@ -46,7 +49,8 @@ public class ExerciseController {
 	@GetMapping("/{id}")
 	public ResponseEntity<Object> getExerciseById(@PathVariable Long id) {
 
-		return ResponseEntity.status(HttpStatus.OK).body(ExercisesHateoas.exerciseToHateoas(exerciseService.getExerciseById(id)));
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(ExercisesHateoas.exerciseToHateoas(exerciseService.getExerciseById(id)));
 
 	}
 
@@ -54,7 +58,8 @@ public class ExerciseController {
 	@PutMapping("/{id}")
 	public ResponseEntity<Object> editExercise(@Valid @RequestBody ExerciseDTO exerciseDTO, @PathVariable Long id) {
 
-		return ResponseEntity.status(HttpStatus.OK).body(exerciseService.editExercise(exerciseDTO, id));
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(ExercisesHateoas.exerciseToHateoas(exerciseService.editExercise(exerciseDTO, id)));
 	}
 
 
