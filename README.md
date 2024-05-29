@@ -1,8 +1,5 @@
 # Projeto Gym Exercícios e Planos de Exercícios
 
-Esta API permite a criação, consulta, atualização e exclusão de exercícios e planos de exercícios para usuários. O
-projeto é desenvolvido em Java utilizando o framework Spring.
-
 ## Índice
 
 - [Descrição](#descrição)
@@ -13,48 +10,6 @@ projeto é desenvolvido em Java utilizando o framework Spring.
 - [Uso](#uso)
 - [Endpoints](#endpoints)
 - [Contribuição](#contribuição)
-
-## Descrição
-
-Esta API foi desenvolvida para gerenciar exercícios físicos e planos de exercícios personalizados para diferentes
-usuários. É possível criar, visualizar, atualizar e deletar exercícios e planos, bem como associar exercícios a planos
-específicos.
-
-## Funcionalidades
-
-- **Gerenciamento de Usuários**: CRUD (Create, Read, Update, Delete) de usuários.
-- **Gerenciamento de Exercícios**: CRUD de exercícios.
-- **Gerenciamento de Planos de Exercícios**: CRUD de planos de exercícios.
-- **Associação de Exercícios a Planos**: Associar exercícios específicos a planos de exercícios.
-- **Autenticação e Autorização**: Controle de acesso baseado em roles.
-- **Navegação HATEOAS**: Inclusão de links de navegação nos recursos retornados.
-
-## Tecnologias Utilizadas
-
-- **Java 17+**
-- **Spring Boot**
-- **Spring Data JPA**
-- **H2 Database (para desenvolvimento e testes)**
-- **PostgreSQL(para produção)**
-- **Spring HATEOAS**
--
-
-# Projeto Gym Exercícios e Planos de Exercícios
-
-Esta API permite a criação, consulta, atualização e exclusão de exercícios e planos de exercícios para usuários. O
-projeto é desenvolvido em Java utilizando o framework Spring.
-
-## Índice
-
-- [Descrição](#descrição)
-- [Funcionalidades](#funcionalidades)
-- [Tecnologias Utilizadas](#tecnologias-utilizadas)
-- [Instalação](#instalação)
-- [Configuração](#configuração)
-- [Uso](#uso)
-- [Endpoints](#endpoints)
-- [Contribuição](#contribuição)
-- [Licença](#licença)
 
 ## Descrição
 
