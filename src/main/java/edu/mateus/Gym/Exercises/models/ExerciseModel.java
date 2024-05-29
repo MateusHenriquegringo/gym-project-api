@@ -13,6 +13,7 @@ import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
+@RequiredArgsConstructor
 @Data
 @Entity
 @Table(name="exercises")

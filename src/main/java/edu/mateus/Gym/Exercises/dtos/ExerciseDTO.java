@@ -4,6 +4,7 @@ import edu.mateus.Gym.Exercises.enums.ExerciseDifficulty;
 import edu.mateus.Gym.Exercises.enums.ExerciseType;
 import edu.mateus.Gym.Exercises.enums.Intensity;
 import edu.mateus.Gym.Exercises.enums.MuscleGroupsEnum;
+import lombok.AllArgsConstructor;
 
 import java.util.List;
 

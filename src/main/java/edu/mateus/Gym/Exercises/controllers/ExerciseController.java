@@ -15,23 +15,23 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/exercises")
+@RequestMapping("/api/exercises")
 public class ExerciseController {
 
 	@Autowired
 	ExerciseService exerciseService;
 
 
-	@GetMapping()
+	@GetMapping
 	public ResponseEntity<List<ExerciseModel>> getAllExercises(
-			@RequestParam(required = false) ExerciseDifficulty difficulty) {
+			@RequestParam(required = false) ExerciseDifficulty dificuldade) {
 
-		if (difficulty == null) {
+		if (dificuldade == null) {
 			return ResponseEntity.status(HttpStatus.OK)
 					.body(ExercisesHateoas.exerciseToHateoas(exerciseService.getAllExercises()));
 		} else {
 			return ResponseEntity.status(HttpStatus.OK)
-					.body(ExercisesHateoas.exerciseToHateoas(exerciseService.getExercisesByDifficulty(difficulty)));
+					.body(ExercisesHateoas.exerciseToHateoas(exerciseService.getExercisesByDifficulty(dificuldade)));
 		}
 
 	}
