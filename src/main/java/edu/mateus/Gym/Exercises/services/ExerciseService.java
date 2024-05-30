@@ -1,29 +1,28 @@
 package edu.mateus.Gym.Exercises.services;
 
-import edu.mateus.Gym.Exercises.controllers.ExerciseController;
+import edu.mateus.Gym.Exercises.builder.model.ExerciseModelBuilder;
 import edu.mateus.Gym.Exercises.dtos.ExerciseDTO;
 import edu.mateus.Gym.Exercises.enums.ExerciseDifficulty;
 import edu.mateus.Gym.Exercises.exceptions.ResourceNotFoundException;
 import edu.mateus.Gym.Exercises.models.ExerciseModel;
 import edu.mateus.Gym.Exercises.repositorys.ExerciseRepository;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 
 @Service
+@RequiredArgsConstructor
 public class ExerciseService {
 
-	@Autowired
-	private ExerciseRepository exerciseRepository;
+
+	private final ExerciseRepository exerciseRepository;
 
 
 	public List<ExerciseModel> getAllExercises() {
@@ -37,7 +36,7 @@ public class ExerciseService {
 
 
 	public ExerciseModel getExerciseById(Long id) {
-		return exerciseRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("exercise was not found"));
+		return exerciseRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
 	}
 
 
@@ -58,20 +57,14 @@ public class ExerciseService {
 
 	@Transactional
 	public ExerciseModel editExercise(ExerciseDTO exerciseDTO, Long id) {
+		ExerciseModel byId = getExerciseById(id);
 
-		ExerciseModel exerciseModel = new ExerciseModel();
-		exerciseModel.setId(id);
-		BeanUtils.copyProperties(exerciseDTO, exerciseModel);
-
-
-		if (exerciseRepository.existsById(exerciseModel.getId())) {
-			if (exerciseRepository.existsByName(exerciseModel.getName())) {
-				throw new DataIntegrityViolationException("this exercise already exists");
-			}
-			return exerciseRepository.save(exerciseModel);
-		} else {
-			throw new ResourceNotFoundException("didn't edited, exercise was not found");
+		if(byId.getName().equals(exerciseDTO.name())){
+			throw new DataIntegrityViolationException("this exercise already exists");
 		}
+
+		ExerciseModel model = ExerciseModelBuilder.buildModel(byId, exerciseDTO);
+			return exerciseRepository.save(model);
 	}
 
 
@@ -81,7 +74,7 @@ public class ExerciseService {
 		if (exerciseRepository.existsById(id)) {
 			exerciseRepository.deleteById(id);
 		} else {
-			throw new ResourceNotFoundException("didn't deleted, exercise was not found");
+			throw new ResourceNotFoundException();
 		}
 	}
 
