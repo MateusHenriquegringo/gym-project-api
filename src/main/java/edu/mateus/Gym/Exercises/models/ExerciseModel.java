@@ -13,7 +13,9 @@ import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
+@AllArgsConstructor
 @RequiredArgsConstructor
+@Builder(toBuilder = true)
 @Data
 @Entity
 @Table(name="exercises")
@@ -48,4 +50,5 @@ public class ExerciseModel extends RepresentationModel<ExerciseModel> {
 	@Enumerated(EnumType.STRING)
 	@NonNull
 	private ExerciseDifficulty difficulty;
+	//////
 }
