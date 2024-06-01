@@ -4,6 +4,7 @@ import edu.mateus.Gym.Exercises.enums.ExerciseDifficulty;
 import edu.mateus.Gym.Exercises.enums.ExerciseType;
 import edu.mateus.Gym.Exercises.enums.Intensity;
 import edu.mateus.Gym.Exercises.enums.MuscleGroupsEnum;
+import jakarta.persistence.metamodel.ListAttribute;
 import jakarta.persistence.metamodel.SingularAttribute;
 import jakarta.persistence.metamodel.StaticMetamodel;
 
@@ -16,6 +17,6 @@ public class ExerciseModel_ {
     public static volatile SingularAttribute<ExerciseModel, String> name;
     public static volatile SingularAttribute<ExerciseModel, Intensity> intensity;
     public static volatile SingularAttribute<ExerciseModel, ExerciseType> type;
-    public static volatile SingularAttribute<ExerciseModel, MuscleGroupsEnum> muscles;
+    public static volatile ListAttribute<ExerciseModel, MuscleGroupsEnum> muscles;
     public static volatile SingularAttribute<ExerciseModel, ExerciseDifficulty> difficulty;
 }
