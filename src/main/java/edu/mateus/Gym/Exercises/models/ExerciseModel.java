@@ -2,7 +2,7 @@ package edu.mateus.Gym.Exercises.models;
 
 import edu.mateus.Gym.Exercises.enums.ExerciseDifficulty;
 import edu.mateus.Gym.Exercises.enums.ExerciseType;
-import edu.mateus.Gym.Exercises.enums.Intensity;
+import edu.mateus.Gym.Exercises.enums.ExerciseIntensity;
 import edu.mateus.Gym.Exercises.enums.MuscleGroupsEnum;
 import jakarta.persistence.*;
 import lombok.*;
@@ -32,7 +32,7 @@ public class ExerciseModel extends RepresentationModel<ExerciseModel> {
 	@Column
 	@NonNull
 	@Enumerated(EnumType.STRING)
-	private Intensity intensity;
+	private ExerciseIntensity intensity;
 
 	@NonNull
 	@Column(name = "exercise_type")
@@ -50,5 +50,5 @@ public class ExerciseModel extends RepresentationModel<ExerciseModel> {
 	@Enumerated(EnumType.STRING)
 	@NonNull
 	private ExerciseDifficulty difficulty;
-	//////
+
 }

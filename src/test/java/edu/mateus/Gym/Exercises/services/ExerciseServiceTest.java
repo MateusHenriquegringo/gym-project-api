@@ -1,9 +1,9 @@
 package edu.mateus.Gym.Exercises.services;
 
-import edu.mateus.Gym.Exercises.dtos.ExerciseDTO;
+import edu.mateus.Gym.Exercises.dtos.response.ExerciseDTO;
 import edu.mateus.Gym.Exercises.enums.ExerciseDifficulty;
 import edu.mateus.Gym.Exercises.enums.ExerciseType;
-import edu.mateus.Gym.Exercises.enums.Intensity;
+import edu.mateus.Gym.Exercises.enums.ExerciseIntensity;
 import edu.mateus.Gym.Exercises.enums.MuscleGroupsEnum;
 import edu.mateus.Gym.Exercises.models.ExerciseModel;
 import edu.mateus.Gym.Exercises.repositorys.ExerciseRepository;
@@ -29,12 +29,12 @@ class ExerciseServiceTest {
 	@Test
 	void createExercise_ThrowsException() {
 
-		ExerciseDTO exerciseDTO = new ExerciseDTO("supino teste", Intensity.MEDIA, ExerciseType.FORCA,
+		ExerciseDTO exerciseDTO = new ExerciseDTO("supino teste", ExerciseIntensity.MEDIA, ExerciseType.FORCA,
 		                                          Arrays.asList(MuscleGroupsEnum.BICEPS, MuscleGroupsEnum.ANTEBRACO),
 		                                          ExerciseDifficulty.INICIANTE);
 
 
-		ExerciseDTO exerciseDTO2 = new ExerciseDTO("supino teste", Intensity.MEDIA, ExerciseType.FORCA,
+		ExerciseDTO exerciseDTO2 = new ExerciseDTO("supino teste", ExerciseIntensity.MEDIA, ExerciseType.FORCA,
 		                                           Arrays.asList(MuscleGroupsEnum.BICEPS, MuscleGroupsEnum.ANTEBRACO),
 		                                           ExerciseDifficulty.INICIANTE);
 

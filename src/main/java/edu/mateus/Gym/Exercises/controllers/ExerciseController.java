@@ -3,55 +3,53 @@ package edu.mateus.Gym.Exercises.controllers;
 import edu.mateus.Gym.Exercises.dtos.ExerciseDTO;
 import edu.mateus.Gym.Exercises.enums.ExerciseDifficulty;
 import edu.mateus.Gym.Exercises.models.ExerciseModel;
+import edu.mateus.Gym.Exercises.services.CreateExerciseService;
+import edu.mateus.Gym.Exercises.services.EditExerciseService;
 import edu.mateus.Gym.Exercises.services.ExerciseService;
-import edu.mateus.Gym.Exercises.tools.ExercisesHateoas;
+import edu.mateus.Gym.Exercises.services.assembler.ExerciseAssembler;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/exercises")
 public class ExerciseController {
 
-	//private final ExerciseListingService exerciseListingService;
+	private final ExerciseService exerciseService;
+
+	private final EditExerciseService editExerciseService;
+
+	private final CreateExerciseService createExerciseService;
+
 	@Autowired
-	ExerciseService exerciseService;
+	ExerciseAssembler assembler;
 
 
 	@GetMapping
-	public ResponseEntity<List<ExerciseModel>> getAllExercises(
+	public ResponseEntity<CollectionModel<ExerciseModel>> getAllExercises(
 			@RequestParam(required = false) ExerciseDifficulty dificuldade) {
 
 		if (ObjectUtils.isEmpty(dificuldade)) {
 			return ResponseEntity.status(HttpStatus.OK)
-					.body(ExercisesHateoas.exerciseToHateoas(exerciseService.getAllExercises()));
+					.body(assembler.toCollectionModel(exerciseService.getAllExercises()));
 		} else {
 			return ResponseEntity.status(HttpStatus.OK)
-					.body(ExercisesHateoas.exerciseToHateoas(exerciseService.getExercisesByDifficulty(dificuldade)));
+					.body(assembler.toCollectionModel(exerciseService.getExercisesByDifficulty(dificuldade)));
 		}
 
 	}
-
-//	@GetMapping
-//	public ResponseEntity<PageDTO<ExerciseResponseDTO>> getAllByFilter(PageFilter pageFilter,
-//																	   FilterRequestDTO filterRequestDTO){
-//		return ResponseEntity.ok().body(exerciseListingService.getAllByFilter(pageFilter, filterRequestDTO));
-//	}
 
 
 	@PostMapping()
 	public ResponseEntity<ExerciseModel> createExercise(@RequestBody @Valid ExerciseDTO exerciseDTO) {
 
-		return ResponseEntity.status(HttpStatus.CREATED)
-				.body(ExercisesHateoas.exerciseToHateoas(exerciseService.createExercise(exerciseDTO)));
-
+		return ResponseEntity.status(HttpStatus.CREATED).body(assembler.toModel(createExerciseService.createExercise(exerciseDTO)));
 	}
 
 
@@ -59,7 +57,7 @@ public class ExerciseController {
 	public ResponseEntity<Object> getExerciseById(@PathVariable Long id) {
 
 		return ResponseEntity.status(HttpStatus.OK)
-				.body(ExercisesHateoas.exerciseToHateoas(exerciseService.getExerciseById(id)));
+				.body(assembler.toModel(exerciseService.getExerciseById(id)));
 
 	}
 
@@ -68,7 +66,7 @@ public class ExerciseController {
 	public ResponseEntity<Object> editExercise(@Valid @RequestBody ExerciseDTO exerciseDTO, @PathVariable Long id) {
 
 		return ResponseEntity.status(HttpStatus.OK)
-				.body(ExercisesHateoas.exerciseToHateoas(exerciseService.editExercise(exerciseDTO, id)));
+				.body(assembler.toModel(editExerciseService.editExercise(exerciseDTO, id)));
 	}
 
 
@@ -79,4 +77,12 @@ public class ExerciseController {
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 
+//	@GetMapping
+//	public ResponseEntity<PageDTO<ExerciseResponseDTO>> getAllByFilter(PageFilter pageFilter,
+//																	   FilterRequestDTO filterRequestDTO){
+//		return ResponseEntity.ok().body(exerciseListingService.getAllByFilter(pageFilter, filterRequestDTO));
+//	}
+
+
 }
+
