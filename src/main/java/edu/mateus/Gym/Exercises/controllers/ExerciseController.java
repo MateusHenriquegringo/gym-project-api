@@ -1,22 +1,20 @@
 package edu.mateus.Gym.Exercises.controllers;
 
-import com.turkraft.springfilter.boot.Filter;
 import edu.mateus.Gym.Exercises.dtos.ExerciseDTO;
 import edu.mateus.Gym.Exercises.enums.ExerciseDifficulty;
 import edu.mateus.Gym.Exercises.enums.MuscleGroupsEnum;
 import edu.mateus.Gym.Exercises.models.ExerciseModel;
 import edu.mateus.Gym.Exercises.services.CreateExerciseService;
 import edu.mateus.Gym.Exercises.services.EditExerciseService;
-import edu.mateus.Gym.Exercises.services.ExerciseService;
+import edu.mateus.Gym.Exercises.services.ExerciseGetByIdAndDeleteService;
+import edu.mateus.Gym.Exercises.services.GetAllExercisesService;
 import edu.mateus.Gym.Exercises.services.assembler.ExerciseAssembler;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,9 +24,11 @@ import java.util.List;
 @RequestMapping("/api/exercises")
 public class ExerciseController {
 
-	private final ExerciseService exerciseService;
+	private final ExerciseGetByIdAndDeleteService exerciseGetByIdAndDeleteService;
 
 	private final EditExerciseService editExerciseService;
+
+	private final GetAllExercisesService getAllExercisesSercive;
 
 	private final CreateExerciseService createExerciseService;
 
@@ -42,8 +42,8 @@ public class ExerciseController {
 			@RequestParam(required = false) List<MuscleGroupsEnum> muscles
 	) {
 
-			return ResponseEntity.status(HttpStatus.OK)
-					.body(assembler.toCollectionModel(exerciseService.getAllExercises(difficulty, muscles)));
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(assembler.toCollectionModel(getAllExercisesSercive.getAllExercises(difficulty, muscles)));
 
 
 	}
@@ -52,7 +52,8 @@ public class ExerciseController {
 	@PostMapping()
 	public ResponseEntity<ExerciseModel> createExercise(@RequestBody @Valid ExerciseDTO exerciseDTO) {
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(assembler.toModel(createExerciseService.createExercise(exerciseDTO)));
+		return ResponseEntity.status(HttpStatus.CREATED)
+				.body(assembler.toModel(createExerciseService.createExercise(exerciseDTO)));
 	}
 
 
@@ -60,7 +61,7 @@ public class ExerciseController {
 	public ResponseEntity<Object> getExerciseById(@PathVariable Long id) {
 
 		return ResponseEntity.status(HttpStatus.OK)
-				.body(assembler.toModel(exerciseService.getExerciseById(id)));
+				.body(assembler.toModel(exerciseGetByIdAndDeleteService.getExerciseById(id)));
 
 	}
 
@@ -76,7 +77,7 @@ public class ExerciseController {
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Object> deleteExercise(@PathVariable Long id) {
 
-		exerciseService.deleteExercise(id);
+		exerciseGetByIdAndDeleteService.deleteExercise(id);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 

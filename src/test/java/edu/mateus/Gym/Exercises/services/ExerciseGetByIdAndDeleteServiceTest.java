@@ -17,10 +17,10 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class ExerciseServiceTest {
+class ExerciseGetByIdAndDeleteServiceTest {
 
 	@Mock
-	ExerciseService exerciseService;
+	ExerciseGetByIdAndDeleteService exerciseGetByIdAndDeleteService;
 
 	@InjectMocks
 	ExerciseRepository exerciseRepository;
@@ -43,9 +43,9 @@ class ExerciseServiceTest {
 		BeanUtils.copyProperties(exerciseDTO, expectedExerciseModel);
 		BeanUtils.copyProperties(exerciseDTO2, expectedExerciseModel2);
 
-		exerciseService.createExercise(exerciseDTO);
+		exerciseGetByIdAndDeleteService.createExercise(exerciseDTO);
 
-		assertThrows(DataIntegrityViolationException.class, () -> exerciseService.createExercise(exerciseDTO2));
+		assertThrows(DataIntegrityViolationException.class, () -> exerciseGetByIdAndDeleteService.createExercise(exerciseDTO2));
 
 	}
 

@@ -34,10 +34,7 @@ public class ExerciseSpecs {
 			List<Predicate> predicates = new ArrayList<>();
 
 			muscles.forEach(
-					muscle -> predicates.add(
-							criteriaBuilder.isMember(muscle, root.get(ExerciseModel_.muscles))
-					)
-			);
+					muscle -> predicates.add(criteriaBuilder.isMember(muscle, root.get(ExerciseModel_.muscles))));
 
 			return criteriaBuilder.and(predicates.toArray(Predicate[]::new));
 
