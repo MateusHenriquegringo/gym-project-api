@@ -1,21 +1,16 @@
 package edu.mateus.Gym.Exercises.services;
 
-import edu.mateus.Gym.Exercises.builder.model.ExerciseModelBuilder;
-import edu.mateus.Gym.Exercises.dtos.ExerciseDTO;
-
 import edu.mateus.Gym.Exercises.enums.ExerciseDifficulty;
+import edu.mateus.Gym.Exercises.enums.MuscleGroupsEnum;
 import edu.mateus.Gym.Exercises.exceptions.ResourceNotFoundException;
 import edu.mateus.Gym.Exercises.models.ExerciseModel;
 import edu.mateus.Gym.Exercises.repositorys.ExerciseRepository;
-import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
+import edu.mateus.Gym.Exercises.repositorys.specification.ExerciseSpecs;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
-
 
 
 @Service
@@ -25,17 +20,19 @@ public class ExerciseService {
 	private final ExerciseRepository exerciseRepository;
 
 
-	public List<ExerciseModel> getAllExercises() {
-		return exerciseRepository.findAll();
-	}
+	public List<ExerciseModel> getAllExercises(ExerciseDifficulty difficulty, List<MuscleGroupsEnum> muscles) {
 
+		Specification<ExerciseModel> spec = Specification
+				.where(ExerciseSpecs.containsAllMuscleGroups(muscles))
+				.and(Specification
+						     .where(ExerciseSpecs.hasDifficulty(difficulty)));
 
-	public List<ExerciseModel> getExercisesByDifficulty(ExerciseDifficulty difficulty) {
-		return exerciseRepository.findAllByDifficulty(difficulty);
+		return exerciseRepository.findAll(spec);
 	}
 
 
 	public ExerciseModel getExerciseById(Long id) {
+
 		return exerciseRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
 	}
 

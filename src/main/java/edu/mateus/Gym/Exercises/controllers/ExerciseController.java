@@ -1,7 +1,9 @@
 package edu.mateus.Gym.Exercises.controllers;
 
+import com.turkraft.springfilter.boot.Filter;
 import edu.mateus.Gym.Exercises.dtos.ExerciseDTO;
 import edu.mateus.Gym.Exercises.enums.ExerciseDifficulty;
+import edu.mateus.Gym.Exercises.enums.MuscleGroupsEnum;
 import edu.mateus.Gym.Exercises.models.ExerciseModel;
 import edu.mateus.Gym.Exercises.services.CreateExerciseService;
 import edu.mateus.Gym.Exercises.services.EditExerciseService;
@@ -10,11 +12,14 @@ import edu.mateus.Gym.Exercises.services.assembler.ExerciseAssembler;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -33,15 +38,13 @@ public class ExerciseController {
 
 	@GetMapping
 	public ResponseEntity<CollectionModel<ExerciseModel>> getAllExercises(
-			@RequestParam(required = false) ExerciseDifficulty dificuldade) {
+			@RequestParam(required = false) ExerciseDifficulty difficulty,
+			@RequestParam(required = false) List<MuscleGroupsEnum> muscles
+	) {
 
-		if (ObjectUtils.isEmpty(dificuldade)) {
 			return ResponseEntity.status(HttpStatus.OK)
-					.body(assembler.toCollectionModel(exerciseService.getAllExercises()));
-		} else {
-			return ResponseEntity.status(HttpStatus.OK)
-					.body(assembler.toCollectionModel(exerciseService.getExercisesByDifficulty(dificuldade)));
-		}
+					.body(assembler.toCollectionModel(exerciseService.getAllExercises(difficulty, muscles)));
+
 
 	}
 

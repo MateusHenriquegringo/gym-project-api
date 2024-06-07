@@ -6,22 +6,21 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum MuscleGroupsEnum {
-	ABDOMEN("Abdomen"),
-	ADUTORES("Adutores"),
-	ANTEBRACO("Antebraço"),
-	ISQUIOTIBIAIS("Isquiotibiais"),
-	LOMBAR("Lombar"),
-	QUADRICEPS("Quadríceps"),
-	POSTERIOR_DA_COXA("Posterior da Coxa"),
-	PANTURRILHA("Panturrilha"),
-	GLUTEOS("Glúteos"),
-	PEITORAL("Peitoral"),
-	DORSAL("Dorsal"),
-	DELTOIDES("Deltoides"),
-	BICEPS("Bíceps"),
-	TRICEPS("Tríceps"),
-	PESCOCO("Pescoço"),
-	TRAPEZIO("Trapézio");
+	ABDOMEN,
+	ADUTORES,
+	ANTEBRACO,
+	ISQUIOTIBIAIS,
+	LOMBAR,
+	QUADRICEPS,
+	POSTERIOR_DA_COXA,
+	PANTURRILHA,
+	GLUTEOS,
+	PEITORAL,
+	DORSAL,
+	DELTOIDES,
+	BICEPS,
+	TRICEPS,
+	PESCOCO,
+	TRAPEZIO;
 
-	private final String name;
 }
