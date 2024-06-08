@@ -20,6 +20,7 @@ public class LoadDatabase {
 	@Getter()
 	private List<ExerciseModel> exercises = loadDatabase();
 
+	// using data.sql
 
 	private List<ExerciseModel> loadDatabase() {
 

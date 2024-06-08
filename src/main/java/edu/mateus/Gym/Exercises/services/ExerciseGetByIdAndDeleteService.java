@@ -4,12 +4,14 @@ import edu.mateus.Gym.Exercises.exceptions.ResourceNotFoundException;
 import edu.mateus.Gym.Exercises.models.ExerciseModel;
 import edu.mateus.Gym.Exercises.repositorys.ExerciseRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 @Service
 @RequiredArgsConstructor
 public class ExerciseGetByIdAndDeleteService {
+
 
 	private final ExerciseRepository exerciseRepository;
 

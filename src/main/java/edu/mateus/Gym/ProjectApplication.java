@@ -7,6 +7,7 @@ import edu.mateus.Gym.Exercises.tools.LoadDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 
 import java.util.List;
@@ -23,14 +24,6 @@ public class ProjectApplication {
 		SpringApplication.run(ProjectApplication.class, args);
 
 	}
-
-
-	@Bean
-	List<ExerciseModel> loadDataBase(ExerciseRepository repository) {
-
-		return repository.saveAll(loader.getExercises());
-	}
-
 
 
 }

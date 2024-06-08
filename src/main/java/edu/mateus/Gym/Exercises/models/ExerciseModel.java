@@ -13,8 +13,8 @@ import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-@AllArgsConstructor
 @RequiredArgsConstructor
+@AllArgsConstructor
 @Builder(toBuilder = true)
 @Data
 @Entity
@@ -38,6 +38,7 @@ public class ExerciseModel extends RepresentationModel<ExerciseModel> {
 	@Column(name = "exercise_type")
 	@Enumerated(EnumType.STRING)
 	private ExerciseType type;
+
 
 	@NonNull
 	@Column
