@@ -1,26 +1,24 @@
 package edu.mateus.Gym.Users.models;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import edu.mateus.Gym.Users.enums.Roles;
 import edu.mateus.Gym.Users.enums.SexEnum;
 import edu.mateus.Gym.Users.tools.DecimalJsonSerializer;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.DecimalMax;
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.Digits;
-import jakarta.validation.constraints.NotBlank;
-import lombok.Data;
+import jakarta.validation.constraints.*;
 
-import java.io.IOException;
+import lombok.*;
 
 
 @Entity
-@Data
-@Table(name = "users")
-public class UserModel {
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Builder(toBuilder = true)
+@Table(name = "USERS")
+public class UserModel  {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,11 +26,11 @@ public class UserModel {
 	private Long id;
 
 	@Column
-	@NotBlank
+	@NonNull
 	private String name;
 
 	@Column
-	@NotBlank
+	@NonNull
 	private Integer age;
 
 	@Column
@@ -40,16 +38,30 @@ public class UserModel {
 	private SexEnum sex;
 
 	@Column
-	@DecimalMax(value = "300.00", message = "peso deve ser menor que 300KG")
-	@DecimalMin(value = "35.00", message = "peso deve ser maior que 30KG")
+	@DecimalMax(value = "300.00", message = "weight must be smaller than 300KG")
+	@DecimalMin(value = "35.00", message = "height must be bigger than 30KG")
 	@JsonSerialize(using = DecimalJsonSerializer.class)
 	private Double weight;
 
-	@DecimalMax(value = "2.20", message = "peso deve ser menor que 2.20M")
-	@DecimalMin(value = "1.10", message = "peso deve ser maior que 1.30M")
+	@DecimalMax(value = "2.20", message = "height must be smaller than 2.20M")
+	@DecimalMin(value = "1.10", message = "height must be bigger than 1.10M")
 	@Column
 	@JsonSerialize(using = DecimalJsonSerializer.class)
 	private Double height;
+
+	@NonNull
+	@Column(unique = true)
+	@Email
+	private String email;
+
+	@Column
+	@NonNull
+	@Size(min = 8, message = "short password")
+	private String password;
+
+	@Column
+	@Enumerated(EnumType.STRING)
+	private Roles roles;
 
 
 }

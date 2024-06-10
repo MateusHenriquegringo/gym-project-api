@@ -28,7 +28,7 @@ public class ExerciseController {
 
 	private final EditExerciseService editExerciseService;
 
-	private final GetAllExercisesService getAllExercisesSercive;
+	private final GetAllExercisesService getAllExercisesService;
 
 	private final CreateExerciseService createExerciseService;
 
@@ -43,13 +43,13 @@ public class ExerciseController {
 	) {
 
 		return ResponseEntity.status(HttpStatus.OK)
-				.body(assembler.toCollectionModel(getAllExercisesSercive.getAllExercises(difficulty, muscles)));
+				.body(assembler.toCollectionModel(getAllExercisesService.getAllExercises(difficulty, muscles)));
 
 
 	}
 
 
-	@PostMapping()
+	@PostMapping
 	public ResponseEntity<ExerciseModel> createExercise(@RequestBody @Valid ExerciseDTO exerciseDTO) {
 
 		return ResponseEntity.status(HttpStatus.CREATED)

@@ -16,9 +16,10 @@ import java.util.List;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-@Data
+@Getter
+@Setter
 @Entity
-@Table(name="exercises")
+@Table(name="EXERCISE")
 public class ExerciseModel extends RepresentationModel<ExerciseModel> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -44,7 +45,7 @@ public class ExerciseModel extends RepresentationModel<ExerciseModel> {
 	@Column
 	@Enumerated(EnumType.STRING)
 	@ElementCollection(targetClass = MuscleGroupsEnum.class)
-	@CollectionTable(name = "muscles")
+	@CollectionTable(name = "MUSCLES")
 	private List<MuscleGroupsEnum> muscles;
 
 	@Column

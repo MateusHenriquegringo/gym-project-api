@@ -1,4 +1,4 @@
-INSERT INTO exercises (exercise_id, name, intensity, exercise_type, difficulty) VALUES
+INSERT INTO EXERCISE (exercise_id, name, intensity, exercise_type, difficulty) VALUES
 (1, 'Corrida', 'ALTA', 'CARDIO', 'INTERMEDIARIO'),
 (2, 'Agachamento com barra', 'ALTA', 'LEVANTAMENTO_PESO', 'INTERMEDIARIO'),
 (3, 'Flexão de braço', 'MEDIA', 'FORCA', 'INICIANTE'),
@@ -51,7 +51,7 @@ INSERT INTO exercises (exercise_id, name, intensity, exercise_type, difficulty) 
  -- Continue inserting other exercises
 
 -- Inserting Muscle data
-INSERT INTO muscles (exercise_model_exercise_id, muscles) VALUES
+INSERT INTO MUSCLES (exercise_model_exercise_id, muscles) VALUES
 (1, 'QUADRICEPS'),
 (1, 'PANTURRILHA'),
 (1, 'GLUTEOS'),

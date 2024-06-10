@@ -9,11 +9,10 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-@RequiredArgsConstructor
 public class ExerciseGetByIdAndDeleteService {
 
-
-	private final ExerciseRepository exerciseRepository;
+	@Autowired
+	private ExerciseRepository exerciseRepository;
 
 
 	public ExerciseModel getExerciseById(Long id) {
