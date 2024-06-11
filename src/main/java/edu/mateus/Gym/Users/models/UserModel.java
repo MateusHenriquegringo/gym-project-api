@@ -9,6 +9,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
 import lombok.*;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
 
 @Entity
