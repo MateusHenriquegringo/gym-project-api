@@ -28,14 +28,15 @@ específicos.
 
 ## Tecnologias Utilizadas
 
-- **Java 17+**
+- **Java 20**
 - **Spring Boot**
 - **Spring Data JPA**
-- **H2 Database (para desenvolvimento e testes)**
-- **PostgreSQL(para produção)**
+- **H2 Database (para testes)**
+- **PostgreSQL (para desenvolvimento)**
 - **Spring HATEOAS**
 - **Docker**
-
+- **JUnit 5**
+- 
 ## Instalação
 
 1. Clone o repositório:
@@ -111,7 +112,8 @@ A API estará disponível em http://localhost:8080.
 
 - GET /api/exercises - Listar todos os exercícios
   - Parâmetros:
-       - dificuldade (opcional): Filtra os exercícios por dificuldade. As opções válidas são: INICIANTE, INTERMEDIARIO, EXPERIENTE.
+       - difficulty (opcional): Filtra os exercícios por dificuldade. As opções válidas são: INICIANTE, INTERMEDIARIO, EXPERIENTE.
+       - muscles (opcional): Filtra os exercícios por musculos. Pode receber uma lista, retornara apenas exercicios que trabalhem todos os musculos da lista.
 - GET /api/exercises/{id} - Obter detalhes de um exercício específico
 - POST /api/exercises - Criar um novo exercício
 - PUT /api/exercises/{id} - Atualizar um exercício
