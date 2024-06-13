@@ -3,11 +3,10 @@ package edu.mateus.Gym.Users.services;
 import edu.mateus.Gym.Users.builder.UserBuilder;
 import edu.mateus.Gym.Users.dtos.RequestUserModelDTO;
 import edu.mateus.Gym.Users.dtos.ResponseUserModelDTO;
-import edu.mateus.Gym.Users.models.UserModel;
+import edu.mateus.Gym.Users.exeptions.EmailNotValidException;
 import edu.mateus.Gym.Users.repository.UserRepository;
-
+import jakarta.validation.ConstraintViolationException;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -27,11 +26,24 @@ public class UserService {
 		repository.findAll().forEach(user -> users.add(UserBuilder.buildResponseDTO(user)));
 
 		return users;
-	};
+	}
 
-	public ResponseUserModelDTO createUser (RequestUserModelDTO requestUsermodelDTO) {
-		UserModel model = repository.save(UserBuilder.buildUserModel(requestUsermodelDTO));
-		return UserBuilder.buildResponseDTO(model);
-	};
+
+	;
+
+
+	public void createUser(RequestUserModelDTO requestUsermodelDTO) {
+
+		try {
+			repository.save(UserBuilder.buildUserModel(requestUsermodelDTO));
+		} catch (ConstraintViolationException exception) {
+			throw new EmailNotValidException();
+		}
+
+
+	}
+
+
+	;
 
 }

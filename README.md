@@ -36,7 +36,7 @@ específicos.
 - **Spring HATEOAS**
 - **Docker**
 - **JUnit 5**
-- 
+
 ## Instalação
 
 1. Clone o repositório:

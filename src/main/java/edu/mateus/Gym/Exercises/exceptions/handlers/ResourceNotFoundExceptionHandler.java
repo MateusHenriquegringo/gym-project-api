@@ -1,4 +1,4 @@
-package edu.mateus.Gym.Exercises.handlers;
+package edu.mateus.Gym.Exercises.exceptions.handlers;
 
 import edu.mateus.Gym.Exercises.exceptions.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;

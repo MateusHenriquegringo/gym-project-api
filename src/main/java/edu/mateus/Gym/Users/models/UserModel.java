@@ -31,7 +31,6 @@ public class UserModel  {
 	private String name;
 
 	@Column
-	@NonNull
 	private Integer age;
 
 	@Column
