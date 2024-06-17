@@ -48,7 +48,6 @@ INSERT INTO EXERCISE (exercise_id, name, intensity, exercise_type, difficulty) V
 (47, 'Alongamento de panturrilha', 'BAIXA', 'ALONGAMENTO', 'INICIANTE'),
 (48, 'Alongamento de ombros', 'BAIXA', 'ALONGAMENTO', 'INICIANTE'),
 (49, 'Torção da coluna vertebral', 'BAIXA', 'ALONGAMENTO', 'INICIANTE');
- -- Continue inserting other exercises
 
 -- Inserting Muscle data
 INSERT INTO MUSCLES (exercise_model_exercise_id, muscles) VALUES

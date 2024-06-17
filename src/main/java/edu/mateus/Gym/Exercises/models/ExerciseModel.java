@@ -15,14 +15,15 @@ import java.util.List;
 @NoArgsConstructor
 @RequiredArgsConstructor
 @AllArgsConstructor
-@Builder(toBuilder = true)
 @Getter
+@Builder
 @Setter
 @Entity
 @Table(name="EXERCISE")
 public class ExerciseModel extends RepresentationModel<ExerciseModel> {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "exercise_id_seq")
+	@SequenceGenerator(name = "exercise_id_seq", initialValue = 50, allocationSize = 1)
 	@Column(name="exercise_id", unique = true)
 	private Long id;
 

@@ -24,7 +24,7 @@ public class ExerciseSpecs {
 	}
 
 
-	public static Specification<ExerciseModel> containsAllMuscleGroups(List<MuscleGroupsEnum> muscles) {
+	public static Specification<ExerciseModel> hasAllMuscleGroups(List<MuscleGroupsEnum> muscles) {
 
 		return (((root, query, criteriaBuilder) -> {
 			if (muscles == null || muscles.isEmpty()) {
