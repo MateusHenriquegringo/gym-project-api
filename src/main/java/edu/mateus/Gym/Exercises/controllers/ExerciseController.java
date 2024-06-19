@@ -4,11 +4,13 @@ import edu.mateus.Gym.Exercises.dtos.ExerciseDTO;
 import edu.mateus.Gym.Exercises.enums.ExerciseDifficulty;
 import edu.mateus.Gym.Exercises.enums.MuscleGroupsEnum;
 import edu.mateus.Gym.Exercises.models.ExerciseModel;
+
 import edu.mateus.Gym.Exercises.services.ExerciseService;
 import edu.mateus.Gym.Exercises.services.assembler.ExerciseAssembler;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

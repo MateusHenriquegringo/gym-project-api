@@ -25,20 +25,22 @@ public class ExerciseService {
 	private ExerciseRepository exerciseRepository;
 
 
+	public List<ExerciseModel> getAllExercises(ExerciseDifficulty difficulty, List<MuscleGroupsEnum> muscles) {
+
+		Specification<ExerciseModel> spec = Specification
+				.where(ExerciseSpecs.hasAllMuscleGroups(muscles))
+				.and(ExerciseSpecs.hasDifficulty(difficulty));
+
+		return exerciseRepository.findAll(spec);
+	}
+
 	public ExerciseModel getExerciseById(Long id) {
 
 		return exerciseRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
 	}
 
 
-	public List<ExerciseModel> getAllExercises(ExerciseDifficulty difficulty, List<MuscleGroupsEnum> muscles) {
 
-		Specification<ExerciseModel> spec = Specification
-				.where(ExerciseSpecs.hasAllMuscleGroups(muscles))
-					.and(ExerciseSpecs.hasDifficulty(difficulty));
-
-		return exerciseRepository.findAll(spec);
-	}
 
 
 	@Transactional

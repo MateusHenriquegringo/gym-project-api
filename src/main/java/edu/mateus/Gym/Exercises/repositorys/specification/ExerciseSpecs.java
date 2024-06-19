@@ -6,10 +6,12 @@ import edu.mateus.Gym.Exercises.models.ExerciseModel;
 import edu.mateus.Gym.Exercises.models.ExerciseModel_;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class ExerciseSpecs {
 
 	public static Specification<ExerciseModel> hasDifficulty(ExerciseDifficulty difficulty) {
