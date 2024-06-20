@@ -32,17 +32,26 @@ public class ExerciseRepositoryTest {
 
 	@BeforeEach
 	public void setUp() {
-
+		exerciseRepository.save(ExerciseModel.builder()
+				                        .name("exercise one")
+				                        .type(ExerciseType.CARDIO)
+				                        .intensity(ExerciseIntensity.MEDIA)
+				                        .muscles(List.of(MuscleGroupsEnum.PEITORAL,
+				                                         MuscleGroupsEnum.ANTEBRACO))
+				                        .difficulty(ExerciseDifficulty.EXPERIENTE)
+				                        .build());
 	}
 	@AfterEach
 	public void clean(){
-
+		exerciseRepository.deleteAll();
 	}
 
 	@Test
 	public void checkExistsByName() {
-
-
+		var output = exerciseRepository.existsByName("exercise one");
+		var falseOutput = exerciseRepository.existsByName("exercise non existent");
+		assertTrue(output);
+		assertFalse(falseOutput);
 	}
 
 }

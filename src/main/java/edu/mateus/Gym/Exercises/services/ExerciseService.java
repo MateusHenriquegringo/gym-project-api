@@ -34,13 +34,11 @@ public class ExerciseService {
 		return exerciseRepository.findAll(spec);
 	}
 
+
 	public ExerciseModel getExerciseById(Long id) {
 
 		return exerciseRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
 	}
-
-
-
 
 
 	@Transactional
