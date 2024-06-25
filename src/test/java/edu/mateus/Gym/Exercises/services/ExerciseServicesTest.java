@@ -229,7 +229,7 @@ public class ExerciseServicesTest {
 					.build();
 
 
-			when(repository.existsByName(nameCaptor.capture())).thenThrow(DataIntegrityViolationException.class);
+			when(repository.existsByName(nameCaptor.capture())).thenReturn(true);
 
 			when(repository.findById(any(Long.class))).thenReturn(Optional.of(exercises.get(0)));
 
@@ -338,21 +338,22 @@ public class ExerciseServicesTest {
 
 		@Test
 		@DisplayName("should not delete if id dont exists")
-		void testDeleteExerciseThrowsExceptionWhenIdDoesNotExists(){
+		void testDeleteExerciseThrowsExceptionWhenIdDoesNotExists() {
 
 			when(repository.existsById(longArgumentCaptor.capture())).thenReturn(false);
 
-			assertThrowsExactly(ResourceNotFoundException.class, ()-> service.deleteExercise(90L));
+			assertThrowsExactly(ResourceNotFoundException.class, () -> service.deleteExercise(90L));
 			verify(repository, never()).deleteById(any());
 		}
 
+
 		@Test
 		@DisplayName("should delete exercise id correctly")
-		void testDeleteExerciseDeleteSuccessfully(){
+		void testDeleteExerciseDeleteSuccessfully() {
 
 			when(repository.existsById(longArgumentCaptor.capture())).thenReturn(true);
 
-			assertDoesNotThrow(()-> service.deleteExercise(90L));
+			assertDoesNotThrow(() -> service.deleteExercise(90L));
 
 			verify(repository, times(1)).deleteById(longArgumentCaptor.capture());
 			assertEquals(90L, longArgumentCaptor.getValue());

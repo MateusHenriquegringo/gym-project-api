@@ -23,16 +23,17 @@ import java.util.List;
 @RequestMapping("/api/exercises")
 public class ExerciseController {
 
-	private final ExerciseService exerciseService;
+	@Autowired
+	ExerciseService exerciseService;
 
 	@Autowired
 	ExerciseAssembler assembler;
 
 
 	@GetMapping
-	public ResponseEntity<CollectionModel<ExerciseModel>> getAllExercises(
-			@RequestParam(required = false) ExerciseDifficulty difficulty,
-			@RequestParam(required = false) List<MuscleGroupsEnum> muscles
+	public ResponseEntity<CollectionModel<ExerciseModel>> getAllExercises (
+			@Valid @RequestParam(required = false) ExerciseDifficulty difficulty,
+			@Valid @RequestParam(required = false) List<MuscleGroupsEnum> muscles
 	) {
 
 		return ResponseEntity.status(HttpStatus.OK)

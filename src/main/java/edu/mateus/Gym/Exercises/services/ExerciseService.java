@@ -19,7 +19,7 @@ import java.util.List;
 
 
 @Service
-public class ExerciseService {
+public class ExerciseService  {
 
 	@Autowired
 	private ExerciseRepository exerciseRepository;
