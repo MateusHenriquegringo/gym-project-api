@@ -1,6 +1,6 @@
-package edu.mateus.Gym.Exercises.exceptions.handlers;
+package edu.mateus.Gym.exceptions.handlers;
 
-import edu.mateus.Gym.Exercises.exceptions.ResourceNotFoundException;
+import edu.mateus.Gym.exceptions.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

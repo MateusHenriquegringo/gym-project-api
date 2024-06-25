@@ -5,16 +5,11 @@ import edu.mateus.Gym.Users.dtos.ResponseUserModelDTO;
 import edu.mateus.Gym.Users.services.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import java.security.PublicKey;
 import java.util.List;
 
 @Controller
@@ -28,14 +23,41 @@ public class UserController {
 	@GetMapping
 	public ResponseEntity<List<ResponseUserModelDTO>> getAllUsers() {
 
-		return ResponseEntity.status(HttpStatus.OK).body(userService.getAllUser());
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(userService.getAllUser());
 	}
 
 
 	@PostMapping
-	public ResponseEntity<ResponseUserModelDTO> createUser(@Valid @RequestBody RequestUserModelDTO requestUserModelDTO) {
-		userService.createUser(requestUserModelDTO);
-		return ResponseEntity.status(HttpStatus.CREATED).build();
+	public ResponseEntity<ResponseUserModelDTO> createUser(
+			@Valid @RequestBody RequestUserModelDTO requestUserModelDTO) {
+
+		return ResponseEntity.status(HttpStatus.CREATED)
+				.body(userService.createUser(requestUserModelDTO));
+	}
+
+
+	@GetMapping("/{id}")
+	public ResponseEntity<ResponseUserModelDTO> findUserById(@PathVariable Long id) {
+
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(userService.getUserById(id));
+	}
+
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> deleteUserById(@PathVariable Long id) {
+
+		userService.deleteUser(id);
+		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+	}
+
+
+	@PutMapping("/{id}")
+	public ResponseEntity<ResponseUserModelDTO> updateUserById(@PathVariable Long id,
+	                                                           @RequestBody @Valid RequestUserModelDTO userDTO) {
+
+		return ResponseEntity.status(HttpStatus.CREATED).body(userService.editUser(userDTO, id));
 	}
 
 }

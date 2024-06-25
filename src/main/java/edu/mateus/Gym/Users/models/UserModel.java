@@ -49,11 +49,6 @@ public class UserModel  {
 	@JsonSerialize(using = DecimalJsonSerializer.class)
 	private Double height;
 
-	@NonNull
-	@Column(unique = true)
-	@Email
-	private String email;
-
 	@Column
 	@NonNull
 	@Size(min = 8, message = "short password")

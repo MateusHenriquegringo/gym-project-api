@@ -6,7 +6,7 @@ import edu.mateus.Gym.Exercises.enums.ExerciseDifficulty;
 import edu.mateus.Gym.Exercises.enums.ExerciseIntensity;
 import edu.mateus.Gym.Exercises.enums.ExerciseType;
 import edu.mateus.Gym.Exercises.enums.MuscleGroupsEnum;
-import edu.mateus.Gym.Exercises.exceptions.ResourceNotFoundException;
+import edu.mateus.Gym.exceptions.ResourceNotFoundException;
 import edu.mateus.Gym.Exercises.models.ExerciseModel;
 import edu.mateus.Gym.Exercises.repositorys.ExerciseRepository;
 import org.junit.jupiter.api.BeforeEach;

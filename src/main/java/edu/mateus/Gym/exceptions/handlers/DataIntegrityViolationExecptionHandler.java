@@ -1,4 +1,4 @@
-package edu.mateus.Gym.Exercises.exceptions.handlers;
+package edu.mateus.Gym.exceptions.handlers;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;

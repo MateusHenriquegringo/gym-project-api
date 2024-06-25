@@ -15,7 +15,6 @@ public class UserBuilder {
 		return UserModel.builder()
 				.name(requestUserModelDTO.name())
 				.age(requestUserModelDTO.age())
-				.email(requestUserModelDTO.email())
 				.height(requestUserModelDTO.height())
 				.weight(requestUserModelDTO.weight())
 				.sex(requestUserModelDTO.sex())
@@ -25,10 +24,10 @@ public class UserBuilder {
 
 	public static ResponseUserModelDTO buildResponseDTO(UserModel model){
 		return ResponseUserModelDTO.builder()
+				.id(model.getId())
 				.age(model.getAge())
 				.sex(model.getSex())
 				.name(model.getName())
-				.email(model.getEmail())
 				.height(model.getHeight())
 				.weight(model.getWeight())
 				.build();

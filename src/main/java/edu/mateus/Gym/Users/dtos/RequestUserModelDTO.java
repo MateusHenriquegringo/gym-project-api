@@ -9,7 +9,6 @@ public record RequestUserModelDTO(
 		SexEnum sex,
 		Double weight,
 		Double height,
-		String email,
 		String password
 ) {
 }

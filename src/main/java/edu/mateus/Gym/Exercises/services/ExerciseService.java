@@ -3,7 +3,7 @@ package edu.mateus.Gym.Exercises.services;
 import edu.mateus.Gym.Exercises.dtos.ExerciseDTO;
 import edu.mateus.Gym.Exercises.enums.ExerciseDifficulty;
 import edu.mateus.Gym.Exercises.enums.MuscleGroupsEnum;
-import edu.mateus.Gym.Exercises.exceptions.ResourceNotFoundException;
+import edu.mateus.Gym.exceptions.ResourceNotFoundException;
 import edu.mateus.Gym.Exercises.models.ExerciseModel;
 import edu.mateus.Gym.Exercises.repositorys.ExerciseRepository;
 import edu.mateus.Gym.Exercises.repositorys.specification.ExerciseSpecs;
@@ -37,14 +37,14 @@ public class ExerciseService  {
 
 	public ExerciseModel getExerciseById(Long id) {
 
-		return exerciseRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+		return exerciseRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("exercise not found"));
 	}
 
 
 	@Transactional
 	public ExerciseModel editExercise(@Valid ExerciseDTO exerciseDTO, Long id) {
 
-		ExerciseModel exerciseToEdit = exerciseRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+		ExerciseModel exerciseToEdit = this.getExerciseById(id);
 
 		if (exerciseRepository.existsByName(exerciseDTO.name())) {
 			throw new DataIntegrityViolationException("exercise with the given name already exists");
@@ -77,7 +77,7 @@ public class ExerciseService  {
 		if (exerciseRepository.existsById(id)) {
 			exerciseRepository.deleteById(id);
 		} else {
-			throw new ResourceNotFoundException();
+			throw new ResourceNotFoundException("exercise not found");
 		}
 	}
 
