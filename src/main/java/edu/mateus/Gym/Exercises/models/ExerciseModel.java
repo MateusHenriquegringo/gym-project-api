@@ -5,8 +5,10 @@ import edu.mateus.Gym.Exercises.enums.ExerciseType;
 import edu.mateus.Gym.Exercises.enums.ExerciseIntensity;
 import edu.mateus.Gym.Exercises.enums.MuscleGroupsEnum;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.server.core.Relation;
 
 import java.util.List;
 
@@ -15,10 +17,10 @@ import java.util.List;
 @NoArgsConstructor
 @RequiredArgsConstructor
 @AllArgsConstructor
-@Getter
+@Data
 @Builder
-@Setter
 @Entity
+@Relation(collectionRelation = "exercises")
 @Table(name="EXERCISE")
 public class ExerciseModel extends RepresentationModel<ExerciseModel> {
 	@Id
@@ -28,6 +30,7 @@ public class ExerciseModel extends RepresentationModel<ExerciseModel> {
 	private Long id;
 
 	@Column(unique = true)
+	@NotBlank
 	@NonNull
 	private String name;
 

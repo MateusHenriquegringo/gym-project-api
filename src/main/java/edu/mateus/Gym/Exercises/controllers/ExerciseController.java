@@ -6,7 +6,7 @@ import edu.mateus.Gym.Exercises.enums.MuscleGroupsEnum;
 import edu.mateus.Gym.Exercises.models.ExerciseModel;
 
 import edu.mateus.Gym.Exercises.services.ExerciseService;
-import edu.mateus.Gym.Exercises.services.assembler.ExerciseAssembler;
+import edu.mateus.Gym.Exercises.controllers.assembler.ExerciseAssembler;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

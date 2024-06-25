@@ -1,7 +1,8 @@
-package edu.mateus.Gym.Exercises.services.assembler;
+package edu.mateus.Gym.Exercises.controllers.assembler;
 
 import edu.mateus.Gym.Exercises.controllers.ExerciseController;
 import edu.mateus.Gym.Exercises.models.ExerciseModel;
+import lombok.NonNull;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
@@ -19,6 +20,7 @@ public class ExerciseAssembler extends RepresentationModelAssemblerSupport<Exerc
 	}
 
 
+	@NonNull
 	@Override
 	public ExerciseModel toModel(ExerciseModel entity) {
 
@@ -29,8 +31,9 @@ public class ExerciseAssembler extends RepresentationModelAssemblerSupport<Exerc
 	}
 
 
+	@NonNull
 	@Override
-	public CollectionModel<ExerciseModel> toCollectionModel(Iterable<? extends ExerciseModel> entities) {
+	public CollectionModel<ExerciseModel> toCollectionModel(@NonNull Iterable<? extends ExerciseModel> entities) {
 
 		return super.toCollectionModel(entities);
 
