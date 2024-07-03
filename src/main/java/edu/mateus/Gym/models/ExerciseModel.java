@@ -50,4 +50,6 @@ public class ExerciseModel extends RepresentationModel<ExerciseModel> {
 	@NonNull
 	private ExerciseDifficulty difficulty;
 
+
+
 }

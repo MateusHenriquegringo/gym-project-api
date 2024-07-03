@@ -2,12 +2,15 @@ package edu.mateus.Gym.models;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import edu.mateus.Gym.enums.MuscleGroupsEnum;
+import edu.mateus.Gym.enums.Roles;
 import edu.mateus.Gym.tools.DecimalJsonSerializer;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
 import lombok.*;
 
+import java.util.List;
 import java.util.Set;
 
 
@@ -53,13 +56,14 @@ public class UserModel  {
 	@Size(min = 8, message = "short password")
 	private String password;
 
+	@ManyToMany
+	List<ExercisePlan> followExercisePlans;
 
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(
-			name = "tb_users_roles",
-			joinColumns = @JoinColumn(name = "user_id"),
-			inverseJoinColumns = @JoinColumn(name = "role_id")
-	)
+
+	@Column
+	@Enumerated(EnumType.STRING)
+	@ElementCollection(targetClass = Roles.class)
+	@CollectionTable(name = "tb_roles")
 	private Set<Roles> roles;
 
 
